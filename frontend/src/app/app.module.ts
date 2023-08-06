@@ -13,6 +13,10 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserService } from './services/user.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationService } from './services/notification.service';
 
 const appRoutes:Routes=[
   { path:'', component:PropertyListComponent },
@@ -40,9 +44,11 @@ const appRoutes:Routes=[
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
-  providers: [HousingServiceService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
