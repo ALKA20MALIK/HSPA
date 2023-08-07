@@ -16,7 +16,8 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from  'ngx-bootstrap/dropdown';
-
+import {TabsModule } from 'ngx-bootstrap/tabs'
+ 
 const appRoutes:Routes=[
   { path:'', component:PropertyListComponent },
   { path:'rent-property', component:PropertyListComponent },
@@ -46,7 +47,8 @@ const appRoutes:Routes=[
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
