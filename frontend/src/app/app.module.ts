@@ -13,10 +13,9 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
-import { UserService } from './services/user.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NotificationService } from './services/notification.service';
+import { BsDropdownModule } from  'ngx-bootstrap/dropdown';
 
 const appRoutes:Routes=[
   { path:'', component:PropertyListComponent },
@@ -46,7 +45,8 @@ const appRoutes:Routes=[
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
