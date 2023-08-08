@@ -6,9 +6,39 @@
   <tabset #FormTabs>
     <tab heading="Basic Info">
       <div class="card-body">
+        <div class="form-gorup col-12">
+          <p>I want to</p>
+          <div class="btn-group" btnRadioGroup>
+            <label class="btn btn-outline-primary m-1" 
+            btnRadio="1" role="button" name="SellRent">Sell</label>
+            <label class="btn btn-outline-primary m-1" 
+            btnRadio="2" role="button" name="SellRent">Rent</label>
+          </div>
+        </div>
+        <div class="form-gorup col-12">
+          <p>BHK</p>
+          <div class="btn-group" btnRadioGroup>
+            <label *ngFor="let bhk of [1,2,3,4]" class="btn btn-outline-primary m-1" 
+            [btnRadio]="bhk" tabindex="0" role="button" name="bhk">{{bhk}} </label>
+          </div>
+        </div>
+        <div class="form-gorup col-12">
+          <p>Property Type </p>
+          <div class="btn-group" btnRadioGroup>
+            <label *ngFor="let propType of PropertyTypes" class="btn btn-outline-primary m-1" 
+            [btnRadio]="propType" tabindex="0" role="button" name="pType">{{propType}} </label>
+          </div>
+        </div>
+        <div class="form-gorup col-12">
+          <p>Furnish Type </p>
+          <div class="btn-group" btnRadioGroup>
+            <label *ngFor="let furnishType of FurnishTypes" class="btn btn-outline-primary m-1" 
+            [btnRadio]="furnishType" tabindex="0" role="button" name="fType">{{furnishType}} </label>
+          </div>
+        </div>
         <form (ngSubmit)="onSubmit()" #Form="ngForm">
           <div class="form-gorup col-12">
-            <label for="name">Name</label>
+            <label for="name"> in Building/Society/Project </label>
             <input type="text" #propName="ngModel" class="form-control" 
              ngModel name="Name" required
              minlength="5">
@@ -23,12 +53,8 @@
             
           </div>
           <div class="form-gorup col-12">
-            <label for="type">Type</label>
-            <input type="text" class="form-control" ngModel name="Type">
-          </div>
-          <div class="form-gorup col-12">
-            <label for="price">Price</label>
-            <input type="text" class="form-control" ngModel name="Price">
+            <label for="price">City</label>
+            <input type="text" class="form-control">
           </div>
           <div class="form-gorup col-12 mt-2">
             <button type="button" class="btn btn-primary btn-width" (click)="selectTab(1)">Next</button>
@@ -101,18 +127,22 @@
     </tab>
     <tab heading="Other Deatils">
       <div class="card-body">
-        <div class="form-group col-12">
-          <label>Ready to Move</label><br/>
-          <input type="radio" id='Yes' value='1' name="RTM">
-          <label class="m-2">Yes</label>
-
-          <input type="radio" id="No" value='2' name="RTM">
-          <label class="m-2">No</label>
+        <div class="form-gorup col-12">
+          <p>Ready to move </p>
+          <div class="btn-group" btnRadioGroup>
+            <label class="btn btn-outline-primary m-1" 
+            btnRadio="1" role="button" name="YesNo">Yes</label>
+            <label class="btn btn-outline-primary m-1" 
+            btnRadio="2" role="button" name="YesNo">No</label>
+          </div>
         </div>
 
         <div class="form-group col-3">
           <label>Possession/Avaialble From</label>
-          <input type="date" class="form-control">
+          <input type="text"
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'DD-MM-YYYY'}">
         </div>
 
         <div class="form-group col-12">
@@ -120,15 +150,26 @@
           <input type="text" class="form-control">
         </div>
 
-        <div class="form-group col-12">
-          <label>Gated Community</label>
-          <input type="text" class="form-control">
+        <div class="form-gorup col-12">
+          <p>Gated Community </p>
+          <div class="btn-group" btnRadioGroup>
+            <label class="btn btn-outline-primary m-1" 
+            btnRadio="1" role="button" name="GatedCommunity">Yes</label>
+            <label class="btn btn-outline-primary m-1" 
+            btnRadio="2" role="button" name="GatedCommunity">No</label>
+          </div>
         </div>
-
-        <div class="form-group col-12">
+        <div class="form-gorup col-12">
+          <p>Ready to move </p>
+          <div class="btn-group" btnRadioGroup>
+            <label *ngFor="let dir of directionList" class="btn btn-outline-primary m-1" 
+            btnRadio="1" tabindex="0" role="button" name="ewns">{{dir}} </label>
+          </div>
+        </div>
+        <!-- <div class="form-group col-12">
           <label>Main Entrance</label>
           <input type="text" class="form-control">
-        </div>
+        </div> -->
 
         <div class="form-group col-12">
           <label>Description</label>
@@ -155,7 +196,13 @@
         <button type="button" class="btn btn-primary btn-width" (click)="selectTab(5)">Next</button>
       </div>
       <div class="form-gorup col-12  mt-2">
-        <button type="button" class="btn btn-primary btn-width" (click)="selectTab(3)">Back</button>
+        <button type="button" class="btn btn-primary btn-width">Back</button>
+      </div>
+      <div class="form-gorup col-12  mt-2">
+        <button type="reset" class="btn btn-primary btn-width">Cancel</button>
+      </div>
+      <div class="form-gorup col-12  mt-2">
+        <button type="submit" class="btn btn-primary btn-width">Save</button>
       </div>
     </tab>
   </tabset>

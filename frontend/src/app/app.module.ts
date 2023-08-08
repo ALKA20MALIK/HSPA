@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card.component';
 import { PropertyListComponent } from './property/property-list/property-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HousingServiceService } from './services/housing-service.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
@@ -16,8 +15,10 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from  'ngx-bootstrap/dropdown';
-import {TabsModule } from 'ngx-bootstrap/tabs'
- 
+import {TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 const appRoutes:Routes=[
   { path:'', component:PropertyListComponent },
   { path:'rent-property', component:PropertyListComponent },
@@ -48,7 +49,9 @@ const appRoutes:Routes=[
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
