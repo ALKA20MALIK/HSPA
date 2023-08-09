@@ -1,9 +1,8 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
-import { IProperty } from '../IProperty';
+import { IPropertyBase } from 'src/app/model/ipropertyBase';
 
 @Component({
   selector: 'app-add-property',
@@ -13,12 +12,18 @@ import { IProperty } from '../IProperty';
 export class AddPropertyComponent implements OnInit {
  @ViewChild('Form') propertyForm!: NgForm;
  @ViewChild('FormTabs') formTabs!: TabsetComponent;
- propertyView: IProperty = {
+ 
+ propertyView: IPropertyBase = {
    Id: 0,
    SellRent: 0,
    Name: '',
-   Type: '',
-   Price: 0
+   PType: '',
+   Price: 0,
+   FType: 0,
+   BHK: 0,
+   BuiltArea: '',
+   City: '',
+   RTM: ''
  };
 
  PropertyTypes= ['House','Apartment','Flat'];
