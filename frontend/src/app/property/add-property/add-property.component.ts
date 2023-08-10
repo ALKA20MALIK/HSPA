@@ -19,7 +19,7 @@ export class AddPropertyComponent implements OnInit {
    Name: '',
    PType: '',
    Price: 0,
-   FType: 0,
+   FType: '',
    BHK: 0,
    BuiltArea: '',
    City: '',
