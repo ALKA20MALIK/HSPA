@@ -32,3 +32,11 @@ position: relative;
 .animate{
     transition: all 0.3s ease-in-out;
 }
+.font-highlight{
+    height: itelic;
+    color: red;
+}
+.card-body h1{
+    font-family: fantasy;
+    color: #0d6efd;
+}
