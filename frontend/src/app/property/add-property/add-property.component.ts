@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { IPropertyBase } from 'src/app/model/ipropertyBase';
@@ -14,23 +14,23 @@ export class AddPropertyComponent implements OnInit {
  @ViewChild('FormTabs') formTabs!: TabsetComponent;
  
  addPropertyForm!: FormGroup;
- nextButtonClicked: boolean = false;
+ nextClicked: boolean = false;
 
  propertyView: IPropertyBase = {
-   Id: 0,
-   SellRent: 0,
-   Name: '',
-   PType: '',
-   Price: 0,
-   FType: '',
-   BHK: 0,
-   BuiltArea: '',
-   City: '',
-   RTM: ''
- };
+  Id: null,
+  Name: '',
+  Price: null,
+  SellRent: null,
+  PType: '',
+  FType: '',
+  BHK: null,
+  BuiltArea: '',
+  City: '',
+  RTM: ''
+};
 
- PropertyTypes= ['House','Apartment','Flat'];
- FurnishTypes= ['Fully','Semi','Unfurnished'];
+ propertyTypes= ['House','Apartment','Flat'];
+ furnishTypes= ['Fully','Semi','Unfurnished'];
  directionList = ['East','West','North','South']
 
   constructor(private fb: FormBuilder, private router: Router) {}
@@ -41,37 +41,64 @@ export class AddPropertyComponent implements OnInit {
   onBack(){
     this.router.navigate(['/']);
   }
-  onSubmit(){ //Form : NgForm
+  onSubmit(){ 
+    this.nextClicked = true;
+    if(this.BasicInfo.invalid){
+      this.formTabs.tabs[0].active = true;
+      return;
+    }
+    if(this.PriceInfo.invalid){
+      this.formTabs.tabs[1].active = true;
+      return;
+    }
+
     console.log('BasicInfo',this.addPropertyForm)
     console.log('PriceInfo',this.addPropertyForm.value.PriceInfo)
 
   }
-  selectTab(tabId: number, IsCurrentValid: boolean){
-    this.nextButtonClicked = true;
+
+  selectTab(nextTabId: number, IsCurrentValid: boolean){
+    this.nextClicked = true;
     if(IsCurrentValid){
-      this.formTabs.tabs[tabId].active=true;
+      this.formTabs.tabs[nextTabId].active=true;
+      this.nextClicked = false;
     }
   }
-  
-  CreateAddPropertyForm(){
+
+  CreateAddPropertyForm() {
     this.addPropertyForm = this.fb.group({
-        BasicInfo:this.fb.group({
-          SellRent: [null, Validators.required],
-          PType: [null, Validators.required],
-          Name: [null, Validators.required]
-          // FType: [null, Validators.required],
-          // Type: [null, Validators.required]
+      BasicInfo: this.fb.group({
+        SellRent: [1, Validators.required],
+        PType: [null, Validators.required],
+        Name: [null, Validators.required]
       }),
-        PriceInfo: this.fb.group({
-          Price: [null, Validators.required],
-          BuiltArea: [null, Validators.required]
-        })
-    })
+      PriceInfo: this.fb.group({
+        Price: [null, Validators.required],
+        BuiltArea: [null, Validators.required]
+      })
+    });
   }
-  get BasicInfo(){
+
+  // -------------------
+  // Getter Methods
+  // -------------------
+  get BasicInfo() {
     return this.addPropertyForm.controls['BasicInfo'] as FormGroup;
   }
-  get SellRent(){
+
+  get PriceInfo() {
+    return this.addPropertyForm.controls['PriceInfo'] as FormGroup;
+  }
+
+  get SellRent() {
     return this.BasicInfo.controls['SellRent'] as FormControl;
+  }
+
+  get Price(){
+  return this.PriceInfo.controls['Price'] as FormControl
+  }
+  
+  get BuiltArea(){
+    return this.PriceInfo.controls['BuiltArea'] as FormControl
   }
 }
