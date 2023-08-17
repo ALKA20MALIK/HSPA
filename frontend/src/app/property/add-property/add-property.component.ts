@@ -5,6 +5,7 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { IPropertyBase } from 'src/app/model/ipropertyBase';
 import { Property } from 'src/app/model/property';
 import { HousingServiceService } from 'src/app/services/housing-service.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-add-property',
@@ -35,7 +36,8 @@ export class AddPropertyComponent implements OnInit {
  furnishTypes= ['Fully','Semi','Unfurnished'];
  directionList = ['East','West','North','South']
 
-  constructor(private fb: FormBuilder, private router: Router, private housingService: HousingServiceService) {}
+  constructor(private fb: FormBuilder, private router: Router, private housingService: HousingServiceService,
+    private notifyService: NotificationService ) {}
 
   ngOnInit() {
     this.CreateAddPropertyForm();
@@ -49,10 +51,16 @@ export class AddPropertyComponent implements OnInit {
       this.mapProperty();
       this.housingService.addProperty(this.property);
 
-      console.log("Congrats, your property listed successfully on our website");
+      this.notifyService.success("Congrats, your property listed successfully on our website");
+      if(this.property.SellRent === 2){
+        this.router.navigate(['/rent-property'])
+      }
+      else
+        this.router.navigate(['/']);
     }
-    else{
-      console.log("Please review the form and provide all the valid entries");
+    else
+    {
+      this.notifyService.error("Please review the form and provide all the valid entries");
     }
 
     console.log('BasicInfo',this.addPropertyForm)
@@ -235,6 +243,7 @@ export class AddPropertyComponent implements OnInit {
   }
 
   mapProperty(): void {
+    this.property.Id = this.housingService.newPropID() || 0;
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK = this.BHK.value;
     this.property.PType = this.PType.value;

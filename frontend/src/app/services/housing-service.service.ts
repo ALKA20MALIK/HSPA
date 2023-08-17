@@ -27,7 +27,29 @@ export class HousingServiceService {
     }));
   }
 
-  addProperty(property: Property):void{
-    localStorage.setItem('newProperty', JSON.stringify(property));
+  addProperty(property: Property):void {
+    let properties=[];
+    if (localStorage.getItem('newProperty')) {
+      properties = JSON.parse(localStorage.getItem('newProperty') as string);
+      debugger
+      properties = [...properties, property];
+    } 
+    else {
+      properties = [property];
+    }
+    localStorage.setItem('newProperty', JSON.stringify(properties));
   }
+
+  newPropID(){
+    if(localStorage.getItem('PID')){
+      localStorage.setItem('PID',String(+(localStorage.getItem('PID') as string) + 1))
+      return +(localStorage.getItem('PID') as string)
+    }
+    else
+    {
+      localStorage.setItem('PID', '101');
+      return 101;
+    }
+  }
+    
 }
