@@ -213,10 +213,6 @@ export class AddPropertyComponent implements OnInit {
     return this.OtherInfo.controls['RTM'] as FormControl;
   }
 
-  get PossesioOn() {
-    return this.OtherInfo.controls['PosessionOn'] as FormControl;
-  }
-
   get AOP() {
     return this.OtherInfo.controls['AOP'] as FormControl;
   }
@@ -238,8 +234,8 @@ export class AddPropertyComponent implements OnInit {
   get MainEntrance(){
     return this.OtherInfo.controls['MainEntrance'] as FormControl;
   }
-  get PossessionOn(){
-    return this.OtherInfo.controls['Possession'] as FormControl;
+  get PosessionOn(){
+    return this.OtherInfo.controls['PosessionOn'] as FormControl;
   }
 
   mapProperty(): void {
@@ -263,9 +259,9 @@ export class AddPropertyComponent implements OnInit {
     this.property.AOP = this.AOP.value;
     this.property.Gated = this.Gated.value;
     this.property.MainEntrance = this.MainEntrance.value;
-   // this.property.Possession = this.PossessionOn.value;
+    this.property.Possession = this.PosessionOn.value;
     this.property.Description = this.Description.value;
-    this.property.Image = 'propNA';
+    this.property.Image = '';
     this.property.PostedOn = new Date().toString();
   }
 }

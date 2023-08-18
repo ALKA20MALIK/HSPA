@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HousingServiceService } from 'src/app/services/housing-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPropertyBase } from 'src/app/model/ipropertyBase';
+import { Property } from 'src/app/model/property';
 
 @Component({
   selector: 'app-property-list',
@@ -21,20 +22,14 @@ export class PropertyListComponent implements OnInit {
       this.SellRent=2;
     }
 
-     this.housingService.getAllProperties(this.SellRent)
-    .subscribe(data=>{
+    this.housingService.getAllProperties(this.SellRent).subscribe(
+      data => {
       this.properties = data;
-      debugger
-      const newProperty = JSON.parse(localStorage.getItem('newProperty') as string);
-
-      if(newProperty[0].SellRent === this.SellRent){
-        this.properties = [newProperty, ...this.properties]
-      }
-      
-    },
-      error=> {
-        console.log(error);
-      }
-    );
+      console.log(data);
+    }, error => {
+      console.log('httperror:');
+      console.log(error);
+    });
   }
+    
 }

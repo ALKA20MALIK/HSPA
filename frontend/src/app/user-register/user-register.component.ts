@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { User } from '../model/user';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -15,7 +16,7 @@ export class UserRegisterComponent implements OnInit {
   user!: User;
   userSubmitted: boolean = false;
   constructor(private fb : FormBuilder, private userService: UserService, 
-    private notification: NotificationService) { }
+    private notification: NotificationService,private router: Router) { }
 
   ngOnInit() {
     this.createRegistrationForm();
@@ -76,6 +77,7 @@ export class UserRegisterComponent implements OnInit {
       this.registrationForm.reset();
       this.userSubmitted =false;
       this.notification.success('User is saved successfully.');
+      this.router.navigate(['/user/login']);
     }
     else{
       this.notification.error('Form is not valid.')
