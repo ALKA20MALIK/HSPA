@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { IPropertyBase } from 'src/app/model/ipropertyBase';
 import { Property } from 'src/app/model/property';
-import { HousingServiceService } from 'src/app/services/housing-service.service';
+import { HousingService } from 'src/app/services/housing.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class AddPropertyComponent implements OnInit {
  furnishTypes= ['Fully','Semi','Unfurnished'];
  directionList = ['East','West','North','South']
 
-  constructor(private fb: FormBuilder, private router: Router, private housingService: HousingServiceService,
+  constructor(private fb: FormBuilder, private router: Router, private housingService: HousingService,
     private notifyService: NotificationService ) {}
 
   ngOnInit() {

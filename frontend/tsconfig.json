@@ -2,6 +2,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": false,
+    "noPropertyAccessFromIndexSignature": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -34,4 +36,5 @@
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
   }
+  
 }

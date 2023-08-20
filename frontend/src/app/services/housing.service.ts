@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IPropertyBase } from '../model/ipropertyBase';
 import { Property } from '../model/property';
 import { IProperty } from '../model/iproperty';
@@ -9,26 +9,47 @@ import { IProperty } from '../model/iproperty';
 @Injectable({
   providedIn: 'root'
 })
-export class HousingServiceService {
+export class HousingService {
 
   constructor(private http: HttpClient  ) { 
   }
-  getAllProperties(SellRent: number): Observable<IPropertyBase[]> {
+
+  getProperty(id: number){
+    return this.getAllProperties(id).pipe(
+      map(propertyArray =>{
+        throw new Error('teststts');
+        return <Property>propertyArray.find(p=>p.Id === id);
+      })
+    );
+  }
+  getAllProperties(SellRent: number): Observable<Property[]> {
     return this.http.get('data/properties.json').pipe(
       map((data: any)=> {
-      const propertiesArray: Array<IPropertyBase> = [];
+      const propertiesArray: Array<Property> = [];
       const localProperties = JSON.parse(localStorage.getItem('newProperty') as string);
 
       if (localProperties) {
         for (const Id in localProperties) {
-          if (localProperties.hasOwnProperty(Id) && localProperties[Id].SellRent === SellRent) {
+          if(SellRent)
+          {
+            if (localProperties.hasOwnProperty(Id) && localProperties[Id].SellRent === SellRent) {
+              propertiesArray.push(localProperties[Id]);
+            }
+          }
+          else{
             propertiesArray.push(localProperties[Id]);
           }
         }
       }
 
       for (const Id in data) {
-        if (data.hasOwnProperty(Id) && data[Id].SellRent === SellRent) {
+        if(SellRent)
+        {
+          if (data.hasOwnProperty(Id) && data[Id].SellRent === SellRent) {
+            propertiesArray.push(data[Id]);
+          }
+        }
+        else{
           propertiesArray.push(data[Id]);
         }
       }
@@ -41,7 +62,6 @@ export class HousingServiceService {
     let properties=[];
     if (localStorage.getItem('newProperty')) {
       properties = JSON.parse(localStorage.getItem('newProperty') as string);
-      debugger
       properties = [...properties, property];
     } 
     else {
@@ -57,8 +77,8 @@ export class HousingServiceService {
     }
     else
     {
-      localStorage.setItem('PID', '101');
-      return 101;
+      localStorage.setItem('PID', '1');
+      return 1;
     }
   }
     

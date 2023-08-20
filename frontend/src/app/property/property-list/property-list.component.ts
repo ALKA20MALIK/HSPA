@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HousingServiceService } from 'src/app/services/housing-service.service';
+import { HousingService } from 'src/app/services/housing.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPropertyBase } from 'src/app/model/ipropertyBase';
 import { Property } from 'src/app/model/property';
@@ -13,7 +13,7 @@ export class PropertyListComponent implements OnInit {
    properties: IPropertyBase[] = [];
    SellRent :number = 1;
 
-  constructor( private housingService: HousingServiceService, private activatedRoute: ActivatedRoute  ) {
+  constructor( private housingService: HousingService, private activatedRoute: ActivatedRoute  ) {
   }
   ngOnInit(): void {
 
