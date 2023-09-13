@@ -12,7 +12,7 @@ namespace webapi.Controllers
     {
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[]{"test"};
+            return new string[]{"Atlanata","New York", "Delhi"};
         }
         
     }
