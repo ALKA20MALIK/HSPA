@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { Observable } from 'rxjs';
 import { IPropertyBase } from 'src/app/model/ipropertyBase';
 import { Property } from 'src/app/model/property';
 import { HousingService } from 'src/app/services/housing.service';
@@ -18,6 +19,7 @@ export class AddPropertyComponent implements OnInit {
  addPropertyForm!: FormGroup;
  nextClicked: boolean = false;
  property = new Property();
+ cityList : string[]=[];
 
  propertyView: IPropertyBase = {
   Id: 0,
@@ -41,7 +43,12 @@ export class AddPropertyComponent implements OnInit {
 
   ngOnInit() {
     this.CreateAddPropertyForm();
+    this.housingService.getAllCity().subscribe(data=>{
+    this.cityList = data;
+    })
   }
+
+
   onBack(){
     this.router.navigate(['/']);
   }
